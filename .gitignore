@@ -1,0 +1,5 @@
+*.ipynb_checkpoints
+__pycache__
+*.csv
+.DS_Store
+notebooks/playground.ipynb
