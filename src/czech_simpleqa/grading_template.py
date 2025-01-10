@@ -65,7 +65,7 @@ Also note the following things:
     - For example, if the gold target is "Hyung Won Chung", you can consider the following predicted answers as correct: "Hyoong Won Choong", "Hyungwon Chung", or "Hyun Won Chung".
 - For grading questions where the gold target is a number, both. For example consider a question 
     - 
-- If a gold target is a name of an institution, place, work of art, either the original or Czech-translated name is a correct ONLY if the name has a well-established Czech Translation.
+- If a gold target is a name of an institution, place, work of art, then either the original or Czech-translated name is a CORRECT predicted answer but ONLY if the name has a well-established Czech translation.
     - If the gold target is "Tamilnádu", then either "Tamil Nadu" or "Tamilnádu" is a CORRECT predicted answer.
     - If the gold target is "řeka Džihlam", then either "Jhelum River" or "řeka Džihlam" is a CORRECT predicted answer.
     - If the gold target is "Kalifornie", then either "California" or "Kalifornie" is a CORRECT predicted answer.

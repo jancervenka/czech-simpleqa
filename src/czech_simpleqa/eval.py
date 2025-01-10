@@ -1,4 +1,5 @@
 import os
+import argparse
 import pandas as pd
 import asyncio as aio
 
@@ -18,12 +19,14 @@ EVAL_DATA_FILE_PATH = os.path.join(
 
 OPENAI_MODELS = [
     "gpt-4o-mini",
-    "gpt-4o"
-],
+    "gpt-4o",
+    "gpt-4o-2024-11-20",
+    "gpt-4o-mini-2024-07-18",
+]
 
 ANTHROPIC_MODELS = [
     "claude-3-5-haiku-latest",
-    "claude-3-5-sonnet-latest"
+    "claude-3-5-sonnet-latest",
 ]
 
 
@@ -38,16 +41,6 @@ class PredictedAnswerGrade(BaseModel):
 class TaskResult(BaseModel):
     answer: str
     grade: str
-
-
-def _get_client(model: str) -> AsyncInstructor:
-    if model in OPENAI_MODELS:
-        raise Exception()
-        return from_openai(AsyncOpenAI())
-    
-    if model in ANTHROPIC_MODELS:
-        raise Exception()
-        return from_anthropic(AsyncAnthropic())
 
 
 async def _answer(
@@ -88,6 +81,29 @@ async def _grade(
         model=model,
         response_model=PredictedAnswerGrade,
     )
+
+
+def _get_client(model: str) -> AsyncInstructor:
+    if model in OPENAI_MODELS:
+        raise Exception()
+        return from_openai(AsyncOpenAI())
+    
+    if model in ANTHROPIC_MODELS:
+        raise Exception()
+        return from_anthropic(AsyncAnthropic())
+
+
+def f1_score(results: pd.DataFrame) -> float:
+    correct = (results["grade"] == "A").sum()
+    not_correct = (results["grade"] == "B").sum()
+    not_attempted = (results["grade"] == "C").sum()
+    return (2 * correct) / (2 * correct + 2 * not_correct + not_attempted)
+
+
+def accuracy_when_attempted(results: pd.DataFrame) -> float:
+    correct = (results["grade"] == "A").sum()
+    not_correct = (results["grade"] == "B").sum()
+    return correct / (correct + not_correct)
 
 
 async def run_eval(
@@ -143,3 +159,47 @@ async def run_eval(
     )
 
     results.to_csv(output_file_path, index=False)
+
+
+def _parse_args(raw_args: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--answering_model",
+        help="Model that will generate predicted answers to the problems in the eval.",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "--grading_model",
+        help="Model that will grade the predicted answers from the answering model.",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "--output_file_path",
+        help="Model that will grade the predicted answers from the answering model.",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "--max_concurrent_tasks",
+        help="Maximum number of async tasks.",
+        type=int,
+        required=False,
+        default=20,
+    )
+
+    args, _ = parser.parse_known_args(raw_args)
+    return args
+
+
+if __name__ == "__main__":
+    args = _parse_args()
+    aio.run(
+        run_eval(
+            answering_model=args.answering_model,
+            grading_model=args.grading_model,
+            output_file_path=args.output_file_path,
+            max_concurrent_tasks=args.max_concurrent_tasks,
+        )
+    )

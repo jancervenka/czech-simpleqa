@@ -14,7 +14,7 @@ class MockCompletions:
 
     @staticmethod
     async def create(*args, **kwargs) -> PredictedAnswer | PredictedAnswerGrade:
-        await aio.sleep(0.01)
+        await aio.sleep(0.001)
         if kwargs["response_model"] is PredictedAnswer:
             return PredictedAnswer(answer="hello")
         
@@ -51,3 +51,7 @@ def test_run_eval() -> None:
         assert len(results) == 4326
         assert results.loc[0, "predicted_answer"] == "hello"
         assert results.loc[0, "grade"] == "C"
+
+
+def test_parse_args():
+    pass
