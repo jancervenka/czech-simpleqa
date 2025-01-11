@@ -39,7 +39,7 @@ class TaskResult(BaseModel):
 
 
 
-def get_retry_config() -> AsyncRetrying:
+def _get_retry_config() -> AsyncRetrying:
     return AsyncRetrying(
         stop=stop_after_attempt(4),
         wait=wait_exponential(multiplier=1, min=30, max=120)
@@ -60,7 +60,8 @@ async def _answer(
         ],
         model=model,
         response_model=PredictedAnswer,
-        max_retries=get_retry_config()
+        max_retries=_get_retry_config(),
+        max_tokens=2048,
     )
 
 
@@ -86,7 +87,8 @@ async def _grade(
         ],
         model=model,
         response_model=PredictedAnswerGrade,
-        max_retries=get_retry_config()
+        max_retries=_get_retry_config(),
+        max_tokens=2048,
     )
 
 
