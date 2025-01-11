@@ -1,6 +1,14 @@
 # Czech-SimpleQA
 
 [eval_data_url]: https://raw.githubusercontent.com/jancervenka/czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz
+[simple-evals]: https://github.com/openai/simple-evals/tree/main
+
+Problems and answers from [OpenAI's SimpleQA eval][simple-evals] translated into Czech. This work is
+based on the data from the paper:
+
+>**Measuring short-form factuality in large language models**  
+>*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*  
+>arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
 
 |                      model | SimpleQA | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
