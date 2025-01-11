@@ -17,19 +17,6 @@ EVAL_DATA_FILE_PATH = os.path.join(
 )
 
 
-OPENAI_MODELS = [
-    "gpt-4o-mini",
-    "gpt-4o",
-    "gpt-4o-2024-11-20",
-    "gpt-4o-mini-2024-07-18",
-]
-
-ANTHROPIC_MODELS = [
-    "claude-3-5-haiku-latest",
-    "claude-3-5-sonnet-latest",
-]
-
-
 class PredictedAnswer(BaseModel):
     answer: str
 
@@ -86,13 +73,10 @@ async def _grade(
 
 
 def _get_client(model: str) -> AsyncInstructor:
-    if model in OPENAI_MODELS:
-        return from_openai(AsyncOpenAI())
-    
-    if model in ANTHROPIC_MODELS:
+    if "claude" in model:
         return from_anthropic(AsyncAnthropic())
     
-    raise ValueError(f"Unknown model={model}")
+    return from_openai(AsyncOpenAI())
 
 
 def f1_score(results: pd.DataFrame) -> float:
