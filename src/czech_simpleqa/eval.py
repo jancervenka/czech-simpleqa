@@ -13,7 +13,7 @@ from .grading_template import CZECH_SIMPLEQA_GRADER_TEMPLATE
 
 EVAL_DATA_FILE_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "czech_simpleqa.gz"
+    "czech_simpleqa.csv.gz"
 )
 
 
