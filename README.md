@@ -6,9 +6,8 @@
 Problems and answers from [OpenAI's SimpleQA eval][simple-evals] translated into Czech. This work is
 based on the data from the paper:
 
->**Measuring short-form factuality in large language models**  
->*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*  
->arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
+>*Wei, J., Karina, N., Chung, H.W., Jiao, Y.J., Papay, S., Glaese, A., Schulman, J., Fedus, W.*
+>(2024). **Measuring short-form factuality in large language models.** arXiv preprint arXiv:2411.04368.
 
 |                      model | SimpleQA | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
