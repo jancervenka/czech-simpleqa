@@ -110,6 +110,14 @@ def accuracy_when_attempted(results: pd.DataFrame) -> float:
     return 0.0
 
 
+def _fix_grade(grade: str) -> str:
+    if grade in ("A", "CORRECT"):
+        return "A"
+    if grade in ("B", "INCORRECT"):
+        return "B"
+    return "C"
+
+
 async def run_eval(
     answering_model: str,
     grading_model: str,
@@ -144,7 +152,7 @@ async def run_eval(
                 problem=problem,
                 target=target,
                 answer=predicted_answer.answer,
-                grade=predicted_answer_grade.grade,
+                grade=_fix_grade(predicted_answer_grade.grade),
             )
     
     tasks = [
