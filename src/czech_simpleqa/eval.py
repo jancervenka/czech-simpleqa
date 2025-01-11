@@ -103,7 +103,9 @@ def f1_score(results: pd.DataFrame) -> float:
 def accuracy_when_attempted(results: pd.DataFrame) -> float:
     correct = (results["grade"] == "A").sum()
     not_correct = (results["grade"] == "B").sum()
-    return correct / (correct + not_correct)
+    if (correct + not_correct) > 0:
+        return correct / (correct + not_correct)
+    return 0.0
 
 
 async def run_eval(
@@ -159,6 +161,10 @@ async def run_eval(
     )
 
     results.to_csv(output_file_path, index=False)
+    print(
+        f"f1_score: {f1_score(results):.3f}\n"
+        f"accuracy_when_attempted: {accuracy_when_attempted(results):.3f}"
+    )
 
 
 def _parse_args(raw_args: list[str] | None = None) -> argparse.Namespace:

@@ -7,6 +7,7 @@ from src.czech_simpleqa.eval import (
     PredictedAnswer,
     PredictedAnswerGrade,
     run_eval,
+    _parse_args
 )
 
 
@@ -54,4 +55,15 @@ def test_run_eval() -> None:
 
 
 def test_parse_args():
-    pass
+    raw_args = [
+        "--answering_model", "gpt-4o-mini",
+        "--grading_model", "gpt-4o",
+        "--output_file_path", "~/test.csv",
+        "--max_concurrent_tasks", "50"
+    ]
+
+    args = _parse_args(raw_args)
+    assert args.answering_model == "gpt-4o-mini"
+    assert args.grading_model == "gpt-4o"
+    assert args.output_file_path == "~/test.csv"
+    assert args.max_concurrent_tasks == 50
