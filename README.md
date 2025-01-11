@@ -22,9 +22,9 @@ eval_data = pd.read_csv(
 )
 ```
 
-## Package Installation and Usage
+## I Want to Use the Python Package
 
-If you want to use the full `czech-simpleqa` Python package to run your evals, you can install it with `pip`:
+You can install the package with `pip`:
 
 ```bash
 pip install czech-simpleqa
@@ -32,7 +32,7 @@ python -m czech_simpleqa.eval \
     --answering_model claude-3-5-haiku-20241022 \
     --grading_model gpt-4o \
     --output_file_path output/claude-3-5-haiku-20241022.csv \
-    --max_concurrent_tasks 2
+    --max_concurrent_tasks 30
 ```
 
 Or just clone the repository:
@@ -44,7 +44,7 @@ python -m src.czech_simpleqa.eval \
     --answering_model claude-3-5-haiku-20241022 \
     --grading_model gpt-4o \
     --output_file_path output/claude-3-5-haiku-20241022.csv \
-    --max_concurrent_tasks 2
+    --max_concurrent_tasks 30
 ```
 
 ### CLI Arguments
