@@ -1,25 +1,28 @@
 # Czech-SimpleQA
 
-[eval_data_url]: https://raw.githubusercontent.com/jancervenka/czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz
+[eval-data]: https://raw.githubusercontent.com/jancervenka/czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz
 [simple-evals]: https://github.com/openai/simple-evals/tree/main
+[simpleqa-arxiv]: https://arxiv.org/abs/2411.04368
 
 Problems and answers from [OpenAI's SimpleQA eval][simple-evals] translated into Czech. This work is
-based on the data from the paper:
+based on the data from [the paper][simpleqa-arxiv]:
 
 >**Measuring short-form factuality in large language models**  
 >*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*  
 >arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
 
-|                      model | SimpleQA | Czech-SimpleQA |
+|                      model | SimpleQA[^1] | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
 | gpt-4o-mini-2024-07-18     | 9.5      | 8.1            |
 | gpt-4o-2024-11-20          | 38.8     | 31.4           |
 | claude-3-5-haiku-20241022  | N/A      | 9.1            |
 | claude-3-5-sonnet-20241022 | N/A      | 31.1           |
 
+[^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
+
 ## I Just Want the Eval Data
 
-The file with the data lives at `src/czech_simpleqa/czech_simpleqa.csv.gz`, [this is the full URL][eval_data_url].
+The file with the data lives at `src/czech_simpleqa/czech_simpleqa.csv.gz`, [this is the full URL][eval-data].
 Getting it with `pandas` looks like this:
 
 ```python
