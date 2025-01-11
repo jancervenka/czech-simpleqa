@@ -39,6 +39,8 @@ class PredictedAnswerGrade(BaseModel):
 
 
 class TaskResult(BaseModel):
+    problem: str
+    target: str
     answer: str
     grade: str
 
@@ -85,12 +87,12 @@ async def _grade(
 
 def _get_client(model: str) -> AsyncInstructor:
     if model in OPENAI_MODELS:
-        raise Exception()
         return from_openai(AsyncOpenAI())
     
     if model in ANTHROPIC_MODELS:
-        raise Exception()
         return from_anthropic(AsyncAnthropic())
+    
+    raise ValueError(f"Unknown model={model}")
 
 
 def f1_score(results: pd.DataFrame) -> float:
@@ -139,8 +141,10 @@ async def run_eval(
             )
             
             return TaskResult(
-                answer = predicted_answer.answer,
-                grade = predicted_answer_grade.grade,
+                problem=problem,
+                target=target,
+                answer=predicted_answer.answer,
+                grade=predicted_answer_grade.grade,
             )
     
     tasks = [
@@ -152,12 +156,12 @@ async def run_eval(
 
     results = pd.DataFrame(
         {
-            "problem": eval_data_row.translated_problem,
-            "target": eval_data_row.translated_answer,
+            "problem": result.problem,
+            "target": result.target,
             "predicted_answer": result.answer,
             "grade": result.grade,
         }
-        for result, eval_data_row in zip(results, eval_data.itertuples())
+        for result in results
     )
 
     results.to_csv(output_file_path, index=False)
@@ -183,7 +187,7 @@ def _parse_args(raw_args: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--output_file_path",
-        help="Model that will grade the predicted answers from the answering model.",
+        help="Where to store the eval results.",
         type=str,
         required=True,
     )
@@ -201,6 +205,7 @@ def _parse_args(raw_args: list[str] | None = None) -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = _parse_args()
+    print(f"Running the eval with max_concurrent_tasks={args.max_concurrent_tasks}.")
     aio.run(
         run_eval(
             answering_model=args.answering_model,
