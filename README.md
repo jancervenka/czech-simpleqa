@@ -11,7 +11,7 @@
 ## I Just Want the Eval Data
 
 The file with the data lives at `src/czech_simpleqa/czech_simpleqa.csv.gz`, [this is the full URL][eval_data_url].
-Getting it with pandas looks like this:
+Getting it with `pandas` looks like this:
 
 ```python
 import pandas as pd
