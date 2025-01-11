@@ -35,18 +35,6 @@ python -m czech_simpleqa.eval \
     --max_concurrent_tasks 30
 ```
 
-Or just clone the repository:
-
-```bash
-git clone git@github.com:jancervenka/czech-simpleqa.git
-cd czech-simpleqa
-python -m src.czech_simpleqa.eval \
-    --answering_model claude-3-5-haiku-20241022 \
-    --grading_model gpt-4o \
-    --output_file_path output/claude-3-5-haiku-20241022.csv \
-    --max_concurrent_tasks 30
-```
-
 ### CLI Arguments
 
 - `--answering_model`: Model that will generate predicted answers to the problems in the eval.
