@@ -2,11 +2,12 @@
 
 [eval_data_url]: https://raw.githubusercontent.com/jancervenka/czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz
 
-|                     model | SimpleQA | Czech-SimpleQA |
-|--------------------------:|---------:|---------------:|
-| gpt-4o-mini-2024-07-18    | 9.5      | 8.1            |
-| gpt-4o-2024-11-20         | 38.8     | 31.4           |
-| claude-3-5-haiku-20241022 | N/A      | 9.1            |
+|                      model | SimpleQA | Czech-SimpleQA |
+|---------------------------:|---------:|---------------:|
+| gpt-4o-mini-2024-07-18     | 9.5      | 8.1            |
+| gpt-4o-2024-11-20          | 38.8     | 31.4           |
+| claude-3-5-haiku-20241022  | N/A      | 9.1            |
+| claude-3-5-sonnet-20241022 | N/A      | 31.1           |
 
 ## I Just Want the Eval Data
 
@@ -24,7 +25,8 @@ eval_data = pd.read_csv(
 
 ## I Want to Use the Python Package
 
-You can install the package with `pip`:
+The package contains everything required to run the eval end-to-end and collect the results.
+You can install it with `pip` or any other Python package manager:
 
 ```bash
 pip install czech-simpleqa
@@ -50,4 +52,5 @@ python -m czech_simpleqa.eval \
 
 ### Supported Models
 
-Models from OpenAI and Anthropic are currently supported.
+Models from OpenAI and Anthropic are currently supported. Environment variables `OPENAI_API_KEY` or
+`ANTHROPIC_API_KEY` need to be configured.
