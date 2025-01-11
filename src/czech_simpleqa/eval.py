@@ -16,6 +16,11 @@ EVAL_DATA_FILE_PATH = os.path.join(
     "czech_simpleqa.csv.gz"
 )
 
+OPENAI_SYSTEM_MESSAGE = {
+    "role": "system",
+    "content": "You are a helpful assistant.",
+}
+
 
 class PredictedAnswer(BaseModel):
     answer: str
@@ -41,6 +46,7 @@ async def _answer(
     # should work with both OpenAI and Anthropic
     return await client.chat.completions.create(
         messages=[
+            OPENAI_SYSTEM_MESSAGE,
             {"role": "user", "content": problem}
         ],
         model=model,
@@ -65,6 +71,7 @@ async def _grade(
 
     return await client.chat.completions.create(
         messages=[
+            OPENAI_SYSTEM_MESSAGE,
             {"role": "user", "content": message}
         ],
         model=model,
