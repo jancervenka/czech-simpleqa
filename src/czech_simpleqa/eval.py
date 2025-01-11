@@ -5,6 +5,7 @@ import asyncio as aio
 
 from tqdm.asyncio import tqdm
 from instructor import AsyncInstructor, from_anthropic, from_openai
+from tenacity import AsyncRetrying, wait_exponential, stop_after_attempt
 from pydantic import BaseModel
 from openai import AsyncOpenAI
 from anthropic import AsyncAnthropic
@@ -37,6 +38,14 @@ class TaskResult(BaseModel):
     grade: str
 
 
+
+def get_retry_config() -> AsyncRetrying:
+    return AsyncRetrying(
+        stop=stop_after_attempt(4),
+        wait=wait_exponential(multiplier=1, min=30, max=120)
+    )
+
+
 async def _answer(
     client: AsyncInstructor,
     problem: str,
@@ -50,7 +59,8 @@ async def _answer(
             {"role": "user", "content": problem}
         ],
         model=model,
-        response_model=PredictedAnswer
+        response_model=PredictedAnswer,
+        max_retries=get_retry_config()
     )
 
 
@@ -76,6 +86,7 @@ async def _grade(
         ],
         model=model,
         response_model=PredictedAnswerGrade,
+        max_retries=get_retry_config()
     )
 
 

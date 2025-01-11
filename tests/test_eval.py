@@ -21,7 +21,7 @@ class MockCompletions:
         await aio.sleep(0.001)
         if kwargs["response_model"] is PredictedAnswer:
 
-            problem = kwargs["messages"][0]["content"]
+            problem = kwargs["messages"][1]["content"]
             answer = "answer to a " + problem
             return PredictedAnswer(answer=answer)
         
