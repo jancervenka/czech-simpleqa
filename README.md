@@ -17,7 +17,7 @@ based on the data from [the paper][simpleqa-arxiv]:
 | gpt-4o-2024-11-20          | 38.8     | 31.4           |
 | claude-3-5-sonnet-20240620 | 35.0     | 25.8           |
 | claude-3-5-sonnet-20241022 | N/A      | 31.1           |
-| claude-3-5-haiku-20241022  | N/A      | 9.1            |
+| claude-3-5-haiku-20241022  | N/A      | 9.3            |
 
 [^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
 
