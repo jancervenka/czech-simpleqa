@@ -12,7 +12,6 @@ based on the data from [the paper][simpleqa-arxiv]:
 >*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*
 >arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
 
-**[There is a post on my blog with more detailed results!][blogpost]**
 |                      model | SimpleQA[^1] | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
 | gpt-4o-mini-2024-07-18     | 9.5      | 8.1            |
@@ -21,6 +20,7 @@ based on the data from [the paper][simpleqa-arxiv]:
 | claude-3-5-sonnet-20241022 | N/A      | 31.1           |
 | claude-3-5-haiku-20241022  | N/A      | 9.3            |
 
+**[There is a post on my blog with more detailed results!][blogpost]**
 [^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
 
 ## What the Data Looks Like:
