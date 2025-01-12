@@ -16,9 +16,6 @@ dependencies = [
     "tqdm>=4.67.1",
 ]
 
-[project.scripts]
-czech-simpleqa = "czech_simpleqa:main"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
