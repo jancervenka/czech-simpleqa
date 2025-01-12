@@ -12,7 +12,7 @@ based on the data from [the paper][simpleqa-arxiv]:
 >*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*
 >arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
 
-**[❗There is a post on my blog with more detailed results!][blogpost]**
+❗**[There is a post on my blog with more detailed results!][blogpost]**
 |                      model | SimpleQA[^1] | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
 | gpt-4o-mini-2024-07-18     | 9.5      | 8.1            |
