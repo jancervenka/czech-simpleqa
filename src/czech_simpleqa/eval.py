@@ -50,7 +50,10 @@ async def _answer(
 ) -> PredictedAnswer:
     # should work with both OpenAI and Anthropic
     return await client.chat.completions.create(
-        messages=[OPENAI_SYSTEM_MESSAGE, {"role": "user", "content": problem}],
+        messages=[
+            OPENAI_SYSTEM_MESSAGE,
+            {"role": "user", "content": problem},
+        ],
         model=model,
         response_model=PredictedAnswer,
         max_retries=_get_retry_config(),
@@ -72,7 +75,10 @@ async def _grade(
     )
 
     return await client.chat.completions.create(
-        messages=[OPENAI_SYSTEM_MESSAGE, {"role": "user", "content": message}],
+        messages=[
+            OPENAI_SYSTEM_MESSAGE,
+            {"role": "user", "content": message},
+        ],
         model=model,
         response_model=PredictedAnswerGrade,
         max_retries=_get_retry_config(),
