@@ -67,7 +67,7 @@ python -m czech_simpleqa.eval \
 ### Output File Schema
 
 |                                 problem |    target |                         predicted_answer | grade |
-|----------------------------------------:|----------:|-----------------------------------------:|------:|
+|:---------------------------------------:|:---------:|:----------------------------------------:|:-----:|
 | Jaké je rozlišení Cat B15 Q v pixelech? | 480 x 800 | Cat B15 Q má rozlišení 480 x 800 pixelů. |     A |
 
 ### Supported Models
