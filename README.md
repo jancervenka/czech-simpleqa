@@ -23,7 +23,7 @@ based on the data from [the paper][simpleqa-arxiv]:
 **[There is a post on my blog with more detailed results!][blogpost]**
 [^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
 
-## What the Data Looks Like:
+## What the Data Looks Like?
 
 |                                                                    problem | target                   |                                                           czech_problem | czech_target            |
 |:--------------------------------------------------------------------------:|:------------------------:|:-----------------------------------------------------------------------:|:-----------------------:|
