@@ -3,14 +3,16 @@
 [eval-data]: https://raw.githubusercontent.com/jancervenka/czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz
 [simple-evals]: https://github.com/openai/simple-evals/tree/main
 [simpleqa-arxiv]: https://arxiv.org/abs/2411.04368
+[blogpost]: https://jancervenka.github.io/2025/01/12/czech-simpleqa.html
 
 Problems and answers from [OpenAI's SimpleQA eval][simple-evals] translated into Czech. This work is
 based on the data from [the paper][simpleqa-arxiv]:
 
->**Measuring short-form factuality in large language models**  
->*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*  
+>**Measuring short-form factuality in large language models**
+>*Jason Wei, Nguyen Karina, Hyung Won Chung, Yunxin Joy Jiao, Spencer Papay, Amelia Glaese, John Schulman, William Fedus*
 >arXiv preprint arXiv:2411.04368, 2024. [https://arxiv.org/abs/2411.04368](https://arxiv.org/abs/2411.04368)
 
+**[❗There is a post on my blog with more detailed results!][blogpost]**
 |                      model | SimpleQA[^1] | Czech-SimpleQA |
 |---------------------------:|---------:|---------------:|
 | gpt-4o-mini-2024-07-18     | 9.5      | 8.1            |
@@ -20,6 +22,12 @@ based on the data from [the paper][simpleqa-arxiv]:
 | claude-3-5-haiku-20241022  | N/A      | 9.3            |
 
 [^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
+
+## What the Data Looks Like:
+
+|                                                                    problem | target                   |                                                           czech_problem | czech_target            |
+|:--------------------------------------------------------------------------:|:------------------------:|:-----------------------------------------------------------------------:|:-----------------------:|
+| What was the population count in the 2011 census of the Republic of Nauru? | 10,084                   | Jaký byl počet obyvatel při sčítání lidu v roce 2011 v Republice Nauru? | 10 084                  |
 
 ## I Just Want the Eval Data
 
