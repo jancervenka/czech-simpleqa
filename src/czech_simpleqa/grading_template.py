@@ -50,9 +50,9 @@ These predicted answers are all NOT_ATTEMPTED because:
 
 
 Also note the following things:
-- For grading questions where the gold target is a number, the predicted answer needs to be correct to the last significant figure in the gold answer. For example, consider a question "Kolik citací má článek o transformeru?" with gold target "120k". 
-    - Predicted answers "120k", "124k", and 115k" are all CORRECT. 
-    - Predicted answers "100k" and "113k" are INCORRECT. 
+- For grading questions where the gold target is a number, the predicted answer needs to be correct to the last significant figure in the gold answer. For example, consider a question "Kolik citací má článek o transformeru?" with gold target "120k".
+    - Predicted answers "120k", "124k", and 115k" are all CORRECT.
+    - Predicted answers "100k" and "113k" are INCORRECT.
     - Predicted answers "asi 100k" and "víc než 50k" are considered NOT_ATTEMPTED because they neither confirm nor contradict the gold target.
 - The gold target may contain more information than the question. In such cases, the predicted answer only needs to contain the information that is in the question.
     - For example, consider the question "V jaké epizodě se Derek a Meredith vzali v seriálu Chirurgové (Grey's Anatomy)?" with gold target "Sezóna 7, Epizoda 20: White Wedding". Either "Sezóna 7, Epizoda 20" or "White Wedding" would be considered a CORRECT answer.
@@ -61,10 +61,8 @@ Also note the following things:
     - Consider the question "Jakou cenu vyhrál článek A pretrainer's guide to training data: Measuring the effects of data age, domain coverage, quality, & toxicity na konferenci NAACL 2024?", the gold target is "cenu Outstanding Paper Award". The predicted answer "Outstanding Paper" would be considered CORRECT, because "cena or award" is presumed in the question.
     - For the question "Jak vysoký je Jason Wei v metrech?", the gold target is "1,73 m". The predicted answer "1,75" would be considered CORRECT, because meters is specified in the question.
     - For the question "Jak se jmenuje manželka Baracka Obamy?", the gold target is "Michelle Obama". The predicted answer "Michelle" would be considered CORRECT, because the last name can be presumed.
-- Do not punish for typos in people's name if it's clearly the same name. 
+- Do not punish for typos in people's name if it's clearly the same name.
     - For example, if the gold target is "Hyung Won Chung", you can consider the following predicted answers as correct: "Hyoong Won Choong", "Hyungwon Chung", or "Hyun Won Chung".
-- For grading questions where the gold target is a number, both. For example consider a question 
-    - 
 - If a gold target is a name of an institution, place, work of art, then either the original or Czech-translated name is a CORRECT predicted answer but ONLY if the name has a well-established Czech translation.
     - If the gold target is "Tamilnádu", then either "Tamil Nadu" or "Tamilnádu" is a CORRECT predicted answer.
     - If the gold target is "řeka Džihlam", then either "Jhelum River" or "řeka Džihlam" is a CORRECT predicted answer.
