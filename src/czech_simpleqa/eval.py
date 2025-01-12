@@ -13,8 +13,7 @@ from anthropic import AsyncAnthropic
 from .grading_template import CZECH_SIMPLEQA_GRADER_TEMPLATE
 
 EVAL_DATA_FILE_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "czech_simpleqa.csv.gz"
+    os.path.dirname(os.path.abspath(__file__)), "czech_simpleqa.csv.gz"
 )
 
 OPENAI_SYSTEM_MESSAGE = {
@@ -38,11 +37,9 @@ class TaskResult(BaseModel):
     grade: str
 
 
-
 def _get_retry_config() -> AsyncRetrying:
     return AsyncRetrying(
-        stop=stop_after_attempt(4),
-        wait=wait_exponential(multiplier=1, min=30, max=120)
+        stop=stop_after_attempt(4), wait=wait_exponential(multiplier=1, min=30, max=120)
     )
 
 
@@ -50,14 +47,10 @@ async def _answer(
     client: AsyncInstructor,
     problem: str,
     model: str,
-)-> PredictedAnswer:
-    
+) -> PredictedAnswer:
     # should work with both OpenAI and Anthropic
     return await client.chat.completions.create(
-        messages=[
-            OPENAI_SYSTEM_MESSAGE,
-            {"role": "user", "content": problem}
-        ],
+        messages=[OPENAI_SYSTEM_MESSAGE, {"role": "user", "content": problem}],
         model=model,
         response_model=PredictedAnswer,
         max_retries=_get_retry_config(),
@@ -72,19 +65,14 @@ async def _grade(
     predicted_answer: str,
     model: str,
 ) -> PredictedAnswerGrade:
-    
     message = CZECH_SIMPLEQA_GRADER_TEMPLATE.format(
         problem=problem,
         target=target,
         predicted_answer=predicted_answer,
-
     )
 
     return await client.chat.completions.create(
-        messages=[
-            OPENAI_SYSTEM_MESSAGE,
-            {"role": "user", "content": message}
-        ],
+        messages=[OPENAI_SYSTEM_MESSAGE, {"role": "user", "content": message}],
         model=model,
         response_model=PredictedAnswerGrade,
         max_retries=_get_retry_config(),
@@ -95,7 +83,7 @@ async def _grade(
 def _get_client(model: str) -> AsyncInstructor:
     if "claude" in model:
         return from_anthropic(AsyncAnthropic())
-    
+
     return from_openai(AsyncOpenAI())
 
 
@@ -128,9 +116,8 @@ async def run_eval(
     output_file_path: str,
     max_concurrent_tasks: int = 20,
 ) -> None:
-    
     eval_data = pd.read_csv(EVAL_DATA_FILE_PATH)
-    
+
     answering_client = _get_client(answering_model)
     grading_client = _get_client(grading_model)
 
@@ -151,14 +138,14 @@ async def run_eval(
                 predicted_answer=predicted_answer.answer,
                 model=grading_model,
             )
-            
+
             return TaskResult(
                 problem=problem,
                 target=target,
                 answer=predicted_answer.answer,
                 grade=_fix_grade(predicted_answer_grade.grade),
             )
-    
+
     tasks = [
         task(problem=r.translated_problem, target=r.translated_answer)
         for r in eval_data.itertuples()

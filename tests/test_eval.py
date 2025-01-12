@@ -10,26 +10,24 @@ from src.czech_simpleqa.eval import (
     run_eval,
     f1_score,
     accuracy_when_attempted,
-    _parse_args
+    _parse_args,
 )
 
 
 class MockCompletions:
-
     @staticmethod
     async def create(*args, **kwargs) -> PredictedAnswer | PredictedAnswerGrade:
         await aio.sleep(0.001)
         if kwargs["response_model"] is PredictedAnswer:
-
             problem = kwargs["messages"][1]["content"]
             answer = "answer to a " + problem
             return PredictedAnswer(answer=answer)
-        
+
         if kwargs["response_model"] is PredictedAnswerGrade:
             return PredictedAnswerGrade(grade="C")
-        
+
         raise ValueError()
-    
+
 
 class MockChat:
     completions = MockCompletions()
@@ -40,10 +38,9 @@ class MockClient:
 
 
 def test_run_eval() -> None:
-
     with (
         tempfile.TemporaryDirectory() as tmp_dir_name,
-        patch("src.czech_simpleqa.eval._get_client", lambda _: MockClient())
+        patch("src.czech_simpleqa.eval._get_client", lambda _: MockClient()),
     ):
         output_file_path = os.path.join(tmp_dir_name, "results.csv")
 
@@ -51,24 +48,28 @@ def test_run_eval() -> None:
             run_eval(
                 answering_model="test",
                 grading_model="test",
-                output_file_path=output_file_path
+                output_file_path=output_file_path,
             )
         )
         results = pd.read_csv(output_file_path)
         assert len(results) == 4326
         assert (
-            results.loc[0, "predicted_answer"] == "answer to a "
-            + results.loc[0, "problem"]
+            results.loc[0, "predicted_answer"]
+            == "answer to a " + results.loc[0, "problem"]
         )
         assert results.loc[0, "grade"] == "C"
 
 
 def test_parse_args() -> None:
     raw_args = [
-        "--answering_model", "gpt-4o-mini",
-        "--grading_model", "gpt-4o",
-        "--output_file_path", "~/test.csv",
-        "--max_concurrent_tasks", "50"
+        "--answering_model",
+        "gpt-4o-mini",
+        "--grading_model",
+        "gpt-4o",
+        "--output_file_path",
+        "~/test.csv",
+        "--max_concurrent_tasks",
+        "50",
     ]
 
     args = _parse_args(raw_args)
@@ -81,11 +82,7 @@ def test_parse_args() -> None:
 def test_metrics() -> None:
     # check the metrics match the original implementation
     # https://github.com/openai/simple-evals/blob/main/simpleqa_eval.py#L164
-    results = pd.DataFrame(
-        {
-            "grade": ["A"] * 500 + ["B"] * 180 + ["C"] * 130
-        }
-    )
+    results = pd.DataFrame({"grade": ["A"] * 500 + ["B"] * 180 + ["C"] * 130})
     results["is_correct"] = results["grade"] == "A"
     results["is_incorrect"] = results["grade"] == "B"
     results["is_not_attempted"] = results["grade"] == "C"
@@ -100,17 +97,25 @@ def test_metrics() -> None:
         aggregate_metrics["is_correct"] + aggregate_metrics["is_incorrect"]
     )
     aggregate_metrics["accuracy_given_attempted"] = (
-        aggregate_metrics["is_correct"]
-        / aggregate_metrics["is_given_attempted"]
+        aggregate_metrics["is_correct"] / aggregate_metrics["is_given_attempted"]
         if aggregate_metrics["is_given_attempted"] > 0
         else 0
     )
 
     expected_accuracy = aggregate_metrics["accuracy_given_attempted"]
     expected_f1 = (
-        2 * aggregate_metrics["accuracy_given_attempted"] * aggregate_metrics["is_correct"]
-        / (aggregate_metrics["accuracy_given_attempted"] + aggregate_metrics["is_correct"])
-        if (aggregate_metrics["accuracy_given_attempted"] + aggregate_metrics["is_correct"]) > 0
+        2
+        * aggregate_metrics["accuracy_given_attempted"]
+        * aggregate_metrics["is_correct"]
+        / (
+            aggregate_metrics["accuracy_given_attempted"]
+            + aggregate_metrics["is_correct"]
+        )
+        if (
+            aggregate_metrics["accuracy_given_attempted"]
+            + aggregate_metrics["is_correct"]
+        )
+        > 0
         else 0
     )
 
