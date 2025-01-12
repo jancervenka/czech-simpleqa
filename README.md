@@ -37,8 +37,6 @@ eval_data = pd.read_csv(
 )
 ```
 
-This is what the eval looks like:
-
 |                                                                    problem | target                   |                                                           czech_problem | czech_target            |
 |:--------------------------------------------------------------------------:|:------------------------:|:-----------------------------------------------------------------------:|:-----------------------:|
 | What was the population count in the 2011 census of the Republic of Nauru? | 10,084                   | Jaký byl počet obyvatel při sčítání lidu v roce 2011 v Republice Nauru? | 10 084                  |
