@@ -23,12 +23,6 @@ based on the data from [the paper][simpleqa-arxiv]:
 **[There is a post on my blog with more detailed results!][blogpost]**
 [^1]: As reported in the [SimpleQA README.md][simple-evals] and in [the paper][simpleqa-arxiv].
 
-## What the Data Looks Like?
-
-|                                                                    problem | target                   |                                                           czech_problem | czech_target            |
-|:--------------------------------------------------------------------------:|:------------------------:|:-----------------------------------------------------------------------:|:-----------------------:|
-| What was the population count in the 2011 census of the Republic of Nauru? | 10,084                   | Jaký byl počet obyvatel při sčítání lidu v roce 2011 v Republice Nauru? | 10 084                  |
-
 ## I Just Want the Eval Data
 
 The file with the data lives at `src/czech_simpleqa/czech_simpleqa.csv.gz`, [this is the full URL][eval-data].
@@ -42,6 +36,12 @@ eval_data = pd.read_csv(
     "czech-simpleqa/refs/heads/main/src/czech_simpleqa/czech_simpleqa.csv.gz"
 )
 ```
+
+This is what the eval looks like:
+
+|                                                                    problem | target                   |                                                           czech_problem | czech_target            |
+|:--------------------------------------------------------------------------:|:------------------------:|:-----------------------------------------------------------------------:|:-----------------------:|
+| What was the population count in the 2011 census of the Republic of Nauru? | 10,084                   | Jaký byl počet obyvatel při sčítání lidu v roce 2011 v Republice Nauru? | 10 084                  |
 
 ## I Want to Use the Python Package
 
