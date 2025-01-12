@@ -1,7 +1,7 @@
 [project]
 name = "czech-simpleqa"
 version = "0.1.0"
-description = "Czech-translated SimpleQA Eval"
+description = "How Well Can Language Models Answer Questions in Czech?"
 readme = "README.md"
 authors = [
     { name = "Jan Cervenka", email = "jan.cervenka@yahoo.com" }
