@@ -72,3 +72,7 @@ python -m czech_simpleqa.eval \
 
 Models from OpenAI and Anthropic are currently supported. Environment variables `OPENAI_API_KEY` or
 `ANTHROPIC_API_KEY` need to be configured.
+
+## Model Results
+
+Answers with their grades from all the evaluated models can be found in the `model_results/` directory.
